@@ -2,7 +2,7 @@
   "name": "User-Management-Application",
   "version": "1.0.0",
   "description": "Simple user management application.",
-  "main": "index.js",
+  "repository": "https://github.com/facebook/flux",
   "author": "Gordon H Graham",
   "license": "MIT",
   "scripts": {
