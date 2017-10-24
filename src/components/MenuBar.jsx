@@ -6,7 +6,8 @@ import Search from 'material-ui/svg-icons/action/search'
 import SortByAlpha from 'material-ui/svg-icons/av/sort-by-alpha'
 import { white } from 'material-ui/styles/colors'
 
-import InputUserModal from './InputUserModal'
+// import InputUserModal from './InputUserModal'
+import UserActions from '../data/UserActions'
 
 const MenuBar = () => (
   <AppBar
@@ -26,7 +27,7 @@ const RightIcons = (
 
 const LeftIcons = (
   <div>
-    <IconButton onClick={() => console.log('Add new user clicked')}><PersonAdd color={white} /></IconButton>
+    <IconButton onClick={() => UserActions.toggleInput()}><PersonAdd color={white} /></IconButton>
   </div>
 )
 

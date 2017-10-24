@@ -10,6 +10,12 @@ const Actions = {
       address,
     })
   },
+
+  toggleInput() {
+    UserDispatcher.dispatch({
+      type: UserActionTypes.TOGGLE_INPUT,
+    })
+  }
 }
 
 export default Actions

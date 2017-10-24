@@ -5,17 +5,17 @@ import MenuBar from './MenuBar'
 import InputUserModal from './InputUserModal'
 
 function App(props) {
-  console.log("this.props in App:", props)
   return (
     <MuiThemeProvider>
       <div>
         <h1 style={{textAlign: 'center', fontFamily: 'roboto'}}>User Management Application</h1>
         <div>
-          <InputUserModal title="Add New User" />
+          <InputUserModal title="Add New User" {...props} />
           <MenuBar />
             {[...props.users.values()].map(user =>
               <UserTile
                 key={user.id}
+                id={user.id}
                 firstName={user.firstName}
                 lastName={user.lastName}
                 address={user.address}

@@ -25,25 +25,29 @@ export default class InputUserModal extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.input !== nextProps.input) {
+      this.setState({ open: nextProps.input })
+    }
+  }
+
   handleOpen = () => {
     this.setState({open: true})
   }
 
   handleSave = () => {
-    // action to save user in flux store
     UserActions.addUser({
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       address: this.state.address,
     })
-
-    // reset component state
+    UserActions.toggleInput()
     this.setState(this.initState)
   }
 
   handleCancel = () => {
-    // reset component state
     this.setState(this.initState)
+    UserActions.toggleInput()
   }
 
   render() {
@@ -62,7 +66,6 @@ export default class InputUserModal extends React.Component {
 
     return (
       <div>
-        {/* <RaisedButton label="Add New User" onClick={this.handleOpen} /> */}
         <Dialog
           title={this.props.title}
           actions={actions}
