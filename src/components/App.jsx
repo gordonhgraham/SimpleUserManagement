@@ -1,18 +1,27 @@
 import React from 'react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import UserTile from './UserTile.jsx'
+import MenuBar from './MenuBar.jsx'
 
 function App(props) {
   return (
-    <div>
-      <h1 style={{textAlign: 'center'}}>User Management Application</h1>
+    <MuiThemeProvider>
       <div>
-        <h3>Users</h3>
-        <ul>
-          {props.users.map(user =>
-            <li key={user.id}>First Name: {user.firstName}, Last Name: {user.lastName}, Address: {user.address}</li>
-          )}
-        </ul>
+        <h1 style={{textAlign: 'center'}}>User Management Application</h1>
+        <div>
+          <h3>Users</h3>
+          <MenuBar />
+            {[...props.users.values()].map(user =>
+              <UserTile
+                key={user.id}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                address={user.address}
+              />
+            )}
+        </div>
       </div>
-    </div>
+    </MuiThemeProvider>
   )
 }
 
