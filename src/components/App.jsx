@@ -7,9 +7,8 @@ function App(props) {
   return (
     <MuiThemeProvider>
       <div>
-        <h1 style={{textAlign: 'center'}}>User Management Application</h1>
+        <h1 style={{textAlign: 'center', fontFamily: 'roboto'}}>User Management Application</h1>
         <div>
-          <h3>Users</h3>
           <MenuBar />
             {[...props.users.values()].map(user =>
               <UserTile
