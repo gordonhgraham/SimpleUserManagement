@@ -19,4 +19,7 @@ module.exports = {
     ]
   },
   plugins: [HtmlWebpackPluginConfig],
+  resolve: {
+    extensions: [".webpack.js", ".web.js", ".js", ".json", ".jsx"],
+  },
 }
