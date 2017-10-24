@@ -18,23 +18,13 @@ class UserStore extends ReduceStore {
   reduce(state, action) {
     switch (action.type) {
       case UserActionTypes.ADD_USER:
-        // update logic for require all fields
-        // if (!action.text) return state;
-        //
-        // const id = Counter.increment()
-        // return state.set(id, new Todo({
-        //   id,
-        //   text: action.text,
-        //   complete: false,
-        // }));
-        return state;
-
-      case UserActionTypes.DELETE_USER:
-        return state.delete(action.id);
-
-      case UserActionTypes.EDIT_USER:
-        // add logic for edit user
-        return state;
+        const id = Counter.increment()
+        return state.set(id, new User({
+          id,
+          firstName: action.firstName,
+          lastName: action.lastName,
+          address: action.address,
+        }));
 
       default:
         return state;
@@ -42,4 +32,4 @@ class UserStore extends ReduceStore {
   }
 }
 
-export default new TodoStore()
+export default new UserStore()
