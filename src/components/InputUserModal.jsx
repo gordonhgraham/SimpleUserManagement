@@ -62,16 +62,18 @@ export default class InputUserModal extends React.Component {
 
     return (
       <div>
-        <RaisedButton label="TEST" onClick={this.handleOpen} />
+        {/* <RaisedButton label="Add New User" onClick={this.handleOpen} /> */}
         <Dialog
           title={this.props.title}
           actions={actions}
           modal={true}
           open={this.state.open}
+          onRequestClose={this.handleCancel}
         >
           <TextField
             floatingLabelText="First Name"
             id="firstName"
+            autoFocus={true}
             defaultValue={this.state.firstName}
             onChange={(e, v) => this.setState({firstName: v})}
           />{" "}
