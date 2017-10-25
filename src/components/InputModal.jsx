@@ -6,7 +6,7 @@ import TextField from 'material-ui/TextField'
 
 import UserActions from '../data/UserActions'
 
-export default class InputUserModal extends React.Component {
+export default class InputModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {

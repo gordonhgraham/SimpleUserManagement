@@ -6,7 +6,7 @@ import Search from 'material-ui/svg-icons/action/search'
 import SortByAlpha from 'material-ui/svg-icons/av/sort-by-alpha'
 import { white } from 'material-ui/styles/colors'
 
-// import InputUserModal from './InputUserModal'
+// import InputModal from './InputModal'
 import UserActions from '../data/UserActions'
 
 const MenuBar = () => (
