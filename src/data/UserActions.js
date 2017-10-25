@@ -11,11 +11,26 @@ const Actions = {
     })
   },
 
+  deleteUser(id) {
+    UserDispatcher.dispatch({
+      type: UserActionTypes.DELETE_USER,
+      id,
+    })
+  },
+
+  editUser(id, user) {
+    UserDispatcher.dispatch({
+      type:UserActionTypes.EDIT_USER,
+      id,
+      user,
+    })
+  },
+
   toggleInput() {
     UserDispatcher.dispatch({
       type: UserActionTypes.TOGGLE_INPUT,
     })
-  }
+  },
 }
 
 export default Actions

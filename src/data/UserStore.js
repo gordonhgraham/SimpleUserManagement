@@ -1,4 +1,4 @@
-import Immutable from 'immutable'
+import Immutable, { get, getIn, setIn } from 'immutable'
 import { ReduceStore } from 'flux/utils'
 
 import Counter from './Counter'
@@ -25,6 +25,15 @@ class UserStore extends ReduceStore {
           lastName: action.lastName,
           address: action.address,
         }));
+
+      case UserActionTypes.DELETE_USER:
+        return state.delete(action.id);
+
+      case UserActionTypes.EDIT_USER:
+        for (let key in action.user) {
+          state = state.setIn([action.id, key], action.user[key]);
+        }
+        return state;
 
       default:
         return state;

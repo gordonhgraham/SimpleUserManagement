@@ -64,6 +64,8 @@ export default class InputUserModal extends React.Component {
       />,
     ]
 
+    const ENTER_KEY_CODE = 13;
+
     return (
       <div>
         <Dialog
@@ -79,18 +81,33 @@ export default class InputUserModal extends React.Component {
             autoFocus={true}
             defaultValue={this.state.firstName}
             onChange={(e, v) => this.setState({firstName: v})}
+            onKeyDown={(e) => {
+              if (e.keyCode == ENTER_KEY_CODE) {
+                this.handleSave()
+              }
+            }}
           />{" "}
           <TextField
             floatingLabelText="Last Name"
             id="lastName"
             defaultValue={this.state.lastName}
             onChange={(e, v) => this.setState({lastName: v})}
+            onKeyDown={(e) => {
+              if (e.keyCode == ENTER_KEY_CODE) {
+                this.handleSave()
+              }
+            }}
           /><br />
           <TextField
             floatingLabelText="Address"
             id="address"
             defaultValue={this.state.address}
             onChange={(e, v) => this.setState({address: v})}
+            onKeyDown={(e) => {
+              if (e.keyCode == ENTER_KEY_CODE) {
+                this.handleSave()
+              }
+            }}
           /><br />
         </Dialog>
       </div>
