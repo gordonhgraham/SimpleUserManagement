@@ -19,7 +19,6 @@ class UserStore extends ReduceStore {
     switch (action.type) {
       case UserActionTypes.ADD_USER:
         const id = Counter.increment()
-        console.log('action:', action);
         action.user.id = id
         return state.set(id, new User(action.user));
 

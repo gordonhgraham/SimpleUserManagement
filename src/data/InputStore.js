@@ -15,7 +15,6 @@ class InputStore extends ReduceStore {
   reduce(state, action) {
     switch (action.type) {
       case UserActionTypes.START_INPUT:
-        console.log('start input called, returning true with action.id:', action.id);
         return [action.id, true];
 
       case UserActionTypes.STOP_INPUT:
