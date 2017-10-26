@@ -15,7 +15,13 @@ function getStores() {
 function getState() {
   return {
     users: UserStore.getState(),
-    input: InputStore.getState(),
+    inputState: InputStore.getState(),
+
+    // onAddUser: UserActions.addUser,
+    // onDeleteUser: UserActions.deleteUser,
+    // onEditUser: UserActions.editUser,
+    // onStartInput: UserActions.startInput,
+    // onStopInput: UserActions.stopInput,
   }
 }
 

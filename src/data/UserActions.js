@@ -2,12 +2,10 @@ import UserActionTypes from './UserActionTypes'
 import UserDispatcher from './UserDispatcher'
 
 const Actions = {
-  addUser({firstName, lastName, address}) {
+  addUser(user) {
     UserDispatcher.dispatch({
       type: UserActionTypes.ADD_USER,
-      firstName,
-      lastName,
-      address,
+      user,
     })
   },
 
@@ -26,9 +24,16 @@ const Actions = {
     })
   },
 
-  toggleInput() {
+  startInput(id = '') {
     UserDispatcher.dispatch({
-      type: UserActionTypes.TOGGLE_INPUT,
+      type: UserActionTypes.START_INPUT,
+      id,
+    })
+  },
+
+  stopInput() {
+    UserDispatcher.dispatch({
+      type: UserActionTypes.STOP_INPUT,
     })
   },
 }

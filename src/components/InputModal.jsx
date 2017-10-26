@@ -5,52 +5,87 @@ import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 
 import UserActions from '../data/UserActions'
+import UserStore from '../data/UserStore'
 
 export default class InputModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false,
-      id: '',
-      firstName: '',
-      lastName: '',
-      address: '',
+      open: this.props.inputState[1],
+      id: this.props.inputState[0],
+      user: {
+        id: '',
+        firstName: '',
+        lastName: '',
+        address: '',
+      },
     }
+
     this.initState = {
       open: false,
       id: '',
-      firstName: '',
-      lastName: '',
-      address: '',
+      user: {
+        id: '',
+        firstName: '',
+        lastName: '',
+        address: '',
+      },
     }
   }
+
+  // populateUserInfo = () => {
+  //   console.log('populateUserInfo Called');
+  //   [...this.props.users.values()].map(user => {
+  //     if (user.id == this.props.inputState[0]) {
+  //       this.setState({
+  //         id: user.id,
+  //         firstName: user.firstName,
+  //         lastName: user.lastName,
+  //         address: user.address,
+  //       })
+  //     }
+  //   })
+  // }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.input !== nextProps.input) {
-      this.setState({ open: nextProps.input })
+    if (this.props.inputState[1] !== nextProps.inputState[1]) {
+      let passedUserId = nextProps.inputState[0]
+
+      let passedUser = nextProps.users.toJS()[passedUserId]
+      if (!passedUser) {
+        this.setState({ open: nextProps.inputState[1] })
+        return;
+      }
+
+      this.setState({
+        open: nextProps.inputState[1],
+        id: nextProps.inputState[0],
+        user: nextProps.users.toJS()[passedUserId],
+      })
     }
   }
 
-  handleOpen = () => {
-    this.setState({open: true})
+  addUser = () => {
+    UserActions.addUser(this.state.user)
+    this.setState(this.initState)
+    UserActions.stopInput()
   }
 
   handleSave = () => {
-    UserActions.addUser({
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      address: this.state.address,
-    })
-    UserActions.toggleInput()
-    this.setState(this.initState)
+    console.log('handleSave called');
+    this.state.id == '' ? this.addUser() : console.log('edit user, not add');
+      // UserActions.editUser(this.state.id, user);
+    // this.setState(this.initState)
+    // UserActions.stopInput()
   }
 
   handleCancel = () => {
+    UserActions.stopInput()
     this.setState(this.initState)
-    UserActions.toggleInput()
   }
 
   render() {
+    console.log('this.state:', this.state);
     const actions = [
       <FlatButton
         label="Cancel"
@@ -63,8 +98,6 @@ export default class InputModal extends React.Component {
         onClick={this.handleSave}
       />,
     ]
-
-    const ENTER_KEY_CODE = 13;
 
     return (
       <div>
@@ -79,35 +112,20 @@ export default class InputModal extends React.Component {
             floatingLabelText="First Name"
             id="firstName"
             autoFocus={true}
-            defaultValue={this.state.firstName}
-            onChange={(e, v) => this.setState({firstName: v})}
-            onKeyDown={(e) => {
-              if (e.keyCode == ENTER_KEY_CODE) {
-                this.handleSave()
-              }
-            }}
+            defaultValue={this.state.user.firstName}
+            onChange={(e, v) => this.setState({ user: { ...this.state.user, firstName: v,}})}
           />{" "}
           <TextField
             floatingLabelText="Last Name"
             id="lastName"
-            defaultValue={this.state.lastName}
-            onChange={(e, v) => this.setState({lastName: v})}
-            onKeyDown={(e) => {
-              if (e.keyCode == ENTER_KEY_CODE) {
-                this.handleSave()
-              }
-            }}
+            defaultValue={this.state.user.lastName}
+            onChange={(e, v) => this.setState({ user: { ...this.state.user, lastName: v,}})}
           /><br />
           <TextField
             floatingLabelText="Address"
             id="address"
-            defaultValue={this.state.address}
-            onChange={(e, v) => this.setState({address: v})}
-            onKeyDown={(e) => {
-              if (e.keyCode == ENTER_KEY_CODE) {
-                this.handleSave()
-              }
-            }}
+            defaultValue={this.state.user.address}
+            onChange={(e, v) => this.setState({ user: { ...this.state.user, address: v,}})}
           /><br />
         </Dialog>
       </div>

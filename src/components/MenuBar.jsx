@@ -9,14 +9,15 @@ import { white } from 'material-ui/styles/colors'
 // import InputModal from './InputModal'
 import UserActions from '../data/UserActions'
 
-const MenuBar = () => (
+const MenuBar = () => {
+  return (
   <AppBar
     title="Users"
     titleStyle={{textAlign: 'center'}}
     iconElementLeft={LeftIcons}
     // iconElementRight={RightIcons}
   />
-);
+)};
 
 const RightIcons = (
   <div>
@@ -27,7 +28,7 @@ const RightIcons = (
 
 const LeftIcons = (
   <div>
-    <IconButton onClick={() => UserActions.toggleInput()}><PersonAdd color={white} /></IconButton>
+    <IconButton onClick={() => UserActions.startInput()}><PersonAdd color={white} /></IconButton>
   </div>
 )
 

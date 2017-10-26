@@ -9,13 +9,17 @@ class InputStore extends ReduceStore {
   }
 
   getInitialState() {
-    return false;
+    return ['', false]
   }
 
   reduce(state, action) {
     switch (action.type) {
-      case UserActionTypes.TOGGLE_INPUT:
-        return !state;
+      case UserActionTypes.START_INPUT:
+        console.log('start input called, returning true with action.id:', action.id);
+        return [action.id, true];
+
+      case UserActionTypes.STOP_INPUT:
+        return ['', false]
 
       default:
         return state;
@@ -24,6 +28,3 @@ class InputStore extends ReduceStore {
 }
 
 export default new InputStore()
-
-
-//initial state, open: bool, id: '', title: if id == '' NEW else EDIT

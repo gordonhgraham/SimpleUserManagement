@@ -19,12 +19,9 @@ class UserStore extends ReduceStore {
     switch (action.type) {
       case UserActionTypes.ADD_USER:
         const id = Counter.increment()
-        return state.set(id, new User({
-          id,
-          firstName: action.firstName,
-          lastName: action.lastName,
-          address: action.address,
-        }));
+        console.log('action:', action);
+        action.user.id = id
+        return state.set(id, new User(action.user));
 
       case UserActionTypes.DELETE_USER:
         return state.delete(action.id);

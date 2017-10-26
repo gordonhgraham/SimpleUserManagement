@@ -10,6 +10,7 @@ function App(props) {
       <div>
         <h1 style={{textAlign: 'center', fontFamily: 'roboto'}}>User Management Application</h1>
         <div>
+          
           <InputModal title="Add New User" {...props} />
           <MenuBar />
             {[...props.users.values()].map(user =>
