@@ -19,6 +19,7 @@ export default class InputModal extends React.Component {
         lastName: '',
         address: '',
       },
+      title: 'Add New User',
     }
 
     this.initState = {
@@ -30,39 +31,36 @@ export default class InputModal extends React.Component {
         lastName: '',
         address: '',
       },
+      title: 'Add New User',
     }
   }
-
-  // populateUserInfo = () => {
-  //   console.log('populateUserInfo Called');
-  //   [...this.props.users.values()].map(user => {
-  //     if (user.id == this.props.inputState[0]) {
-  //       this.setState({
-  //         id: user.id,
-  //         firstName: user.firstName,
-  //         lastName: user.lastName,
-  //         address: user.address,
-  //       })
-  //     }
-  //   })
-  // }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.inputState[1] !== nextProps.inputState[1]) {
       let passedUserId = nextProps.inputState[0]
-
+      let passedOpenState = nextProps.inputState[1]
       let passedUser = nextProps.users.toJS()[passedUserId]
-      if (!passedUser) {
-        this.setState({ open: nextProps.inputState[1] })
-        return;
-      }
 
-      this.setState({
-        open: nextProps.inputState[1],
-        id: nextProps.inputState[0],
-        user: nextProps.users.toJS()[passedUserId],
-      })
+      if (!passedUser) {
+        this.initNewUserState(passedOpenState)
+      } else {
+        this.initEditUserState(passedUser, nextProps.inputState)
+      }
     }
+  }
+
+  initNewUserState = (open) => {
+    this.setState({ open, })
+  }
+
+  initEditUserState = (user, inputState) => {
+    const title = `Edit ${user.firstName} ${user.lastName}`
+    this.setState({
+      open: inputState[1],
+      id: inputState[0],
+      user,
+      title,
+    })
   }
 
   addUser = () => {
@@ -71,21 +69,22 @@ export default class InputModal extends React.Component {
     UserActions.stopInput()
   }
 
+  editUser = () => {
+    UserActions.editUser(this.state.id, this.state.user)
+    this.setState(this.initState)
+    UserActions.stopInput()
+  }
+
   handleSave = () => {
-    console.log('handleSave called');
-    this.state.id == '' ? this.addUser() : console.log('edit user, not add');
-      // UserActions.editUser(this.state.id, user);
-    // this.setState(this.initState)
-    // UserActions.stopInput()
+    this.state.id == '' ? this.addUser() : this.editUser();
   }
 
   handleCancel = () => {
-    UserActions.stopInput()
     this.setState(this.initState)
+    UserActions.stopInput()
   }
 
   render() {
-    console.log('this.state:', this.state);
     const actions = [
       <FlatButton
         label="Cancel"
@@ -102,7 +101,7 @@ export default class InputModal extends React.Component {
     return (
       <div>
         <Dialog
-          title={this.props.title}
+          title={this.state.title}
           actions={actions}
           modal={true}
           open={this.state.open}
