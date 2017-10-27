@@ -1,8 +1,9 @@
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import UserTile from './UserTile'
-import MenuBar from './MenuBar'
+
 import InputModal from './InputModal'
+import MenuBar from './MenuBar'
+import UserTile from './UserTile'
 
 function App(props) {
   return (
@@ -10,8 +11,7 @@ function App(props) {
       <div>
         <h1 style={{textAlign: 'center', fontFamily: 'roboto'}}>User Management Application</h1>
         <div>
-          
-          <InputModal title="Add New User" {...props} />
+          <InputModal {...props} />
           <MenuBar />
             {[...props.users.values()].map(user =>
               <UserTile

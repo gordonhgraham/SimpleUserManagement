@@ -7,8 +7,8 @@ import UserStore from '../data/UserStore'
 
 function getStores() {
   return [
-    UserStore,
     InputStore,
+    UserStore,
   ];
 }
 
@@ -16,12 +16,6 @@ function getState() {
   return {
     users: UserStore.getState(),
     inputState: InputStore.getState(),
-
-    // onAddUser: UserActions.addUser,
-    // onDeleteUser: UserActions.deleteUser,
-    // onEditUser: UserActions.editUser,
-    // onStartInput: UserActions.startInput,
-    // onStopInput: UserActions.stopInput,
   }
 }
 

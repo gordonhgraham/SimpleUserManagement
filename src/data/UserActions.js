@@ -24,6 +24,19 @@ const Actions = {
     })
   },
 
+  startDelete(user) {
+    UserDispatcher.dispatch({
+      type: UserActionTypes.START_DELETE,
+      user,
+    })
+  },
+
+  stopDelete() {
+    UserDispatcher.dispatch({
+      type: UserActionTypes.STOP_DELETE,
+    })
+  },
+
   startInput(id = '') {
     UserDispatcher.dispatch({
       type: UserActionTypes.START_INPUT,

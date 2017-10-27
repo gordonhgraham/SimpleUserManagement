@@ -123,6 +123,8 @@ export default class InputModal extends React.Component {
           <TextField
             floatingLabelText="Address"
             id="address"
+            multiLine={true}
+            rows={2}
             defaultValue={this.state.user.address}
             onChange={(e, v) => this.setState({ user: { ...this.state.user, address: v,}})}
           /><br />
