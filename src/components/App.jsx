@@ -6,6 +6,9 @@ import MenuBar from './MenuBar'
 import UserTile from './UserTile'
 
 function App(props) {
+  const users = Object.values(props.users.toJS())
+  users.sort((a, b) => a.firstName.localeCompare(b.firstName))
+
   return (
     <MuiThemeProvider>
       <div>
@@ -13,7 +16,7 @@ function App(props) {
         <div>
           <InputModal {...props} />
           <MenuBar />
-            {[...props.users.values()].map(user =>
+            {users.map(user =>
               <UserTile
                 key={user.id}
                 id={user.id}
@@ -27,5 +30,7 @@ function App(props) {
     </MuiThemeProvider>
   )
 }
+
+
 
 export default App
